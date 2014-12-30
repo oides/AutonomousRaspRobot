@@ -43,18 +43,15 @@ void Server::start()
         if (client_sock < 0)
         {
             cout << "accept failed" << endl;
-            return;
         }
         else
         {
             cout << "Connection accepted [" << client_sock << "]" << endl;
+            std::thread t1(&Server::listeningMessages, this, client_sock);
+            t1.detach();
+            cout << "Thread created" << endl;
         }
-
-        std::thread t1(&Server::listeningMessages, this, client_sock);
-        t1.detach();
-        cout << "Thread created" << endl;
     }
-
 }
 
 void Server::listeningMessages(int socket)
