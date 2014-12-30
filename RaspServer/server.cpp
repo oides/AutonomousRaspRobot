@@ -27,36 +27,48 @@ Server::Server()
     }
 }
 
-void Server::listening()
+void Server::start()
 {
     //Listen
     listen(socket_desc , 3);
 
     //Accept and incoming connection
     cout << "Waiting for incoming connections..." << endl;
-    c = sizeof(struct sockaddr_in);
+    int c = sizeof(struct sockaddr_in);
 
     //accept connection from an incoming client
-    client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c);
-    if (client_sock < 0)
+    while(1)
     {
-        cout << "accept failed" << endl;
-        return;
-    }
-    else
-    {
-        cout << "Connection accepted" << endl;
+        int client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c);
+        if (client_sock < 0)
+        {
+            cout << "accept failed" << endl;
+            return;
+        }
+        else
+        {
+            cout << "Connection accepted [" << client_sock << "]" << endl;
+        }
+
+        std::thread t1(&Server::listeningMessages, this, client_sock);
+        t1.detach();
+        cout << "Thread created" << endl;
     }
 
+}
+
+void Server::listeningMessages(int socket)
+{
     //Receive a message from client
-    while( (read_size = recv(client_sock , client_message , 2000 , 0)) > 0 )
+    int read_size;
+    while( (read_size = recv(socket , client_message , 2000 , 0)) > 0 )
     {
-        cout << "[" << client_message << "][" << read_size << "]" <<endl;
+        cout << "[" << client_message << "][" << strlen(client_message) << "]" <<endl;
     }
 
     if(read_size == 0)
     {
-        cout << "Client disconnected" << endl;
+        cout << "Client disconnected [" << socket << "]" << endl;
         fflush(stdout);
     }
     else if(read_size == -1)

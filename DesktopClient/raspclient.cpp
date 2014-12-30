@@ -41,5 +41,4 @@ void RaspClient::sendMessage(const char *message)
     {
         cout << "Send failed" << endl;
     }
-
 }

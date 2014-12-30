@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     Server server;
-    server.listening();
+    server.start();
 
     return 0;
 }

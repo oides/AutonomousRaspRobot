@@ -7,19 +7,21 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <thread>
 
 using namespace std;
 
 class Server
 {
 private:
-    int socket_desc , client_sock , c , read_size;
+    int socket_desc;
     struct sockaddr_in server , client;
     char client_message[100];
+    void listeningMessages(int socket);
 
 public:
     Server();
-    void listening();
+    void start();
 };
 
 #endif // SERVER_H
