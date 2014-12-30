@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    raspclient.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    raspclient.h
 
 FORMS    += mainwindow.ui

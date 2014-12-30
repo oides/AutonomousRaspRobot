@@ -1,10 +1,13 @@
 #include <iostream>
+#include "server.h"
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello World!" << endl;
+    Server server;
+    server.listening();
+
     return 0;
 }
 

@@ -19,5 +19,7 @@ void MainWindow::on_controlInput_textChanged(const QString &arg1)
     {
         ui->commandLabel->setText("Comando: " + arg1);
         ui->controlInput->setText("");
+
+        raspClient.sendMessage(arg1.toUtf8().constData());
     }
 }
