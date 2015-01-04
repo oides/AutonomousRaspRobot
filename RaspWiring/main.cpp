@@ -7,8 +7,11 @@ int
 main()
 {
     MessageQueue messageQueue;
-    messageQueue.sendMessage("B");
-    messageQueue.receiveMessage();
+
+    while(1)
+    {
+        messageQueue.receiveMessage();
+    }
 
     return 0;
 }

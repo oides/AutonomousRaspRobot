@@ -22,7 +22,8 @@ MessageQueue::MessageQueue()
 MessageQueue::~MessageQueue()
 {
     mq_close(mqd);
-    //mq_unlink(MQ_NAME);
+    mq_unlink(MQ_NAME);
+    cout << "Message Queue Closed" << endl;
 }
 
 void MessageQueue::sendMessage(char* message)
