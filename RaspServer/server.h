@@ -8,6 +8,8 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <thread>
+#include "messagequeue.h"
+
 
 using namespace std;
 
@@ -18,6 +20,7 @@ private:
     struct sockaddr_in server , client;
     char client_message[100];
     void listeningMessages(int socket);
+    MessageQueue messageQueue;
 
 public:
     Server();

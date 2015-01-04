@@ -61,6 +61,7 @@ void Server::listeningMessages(int socket)
     while( (read_size = recv(socket , client_message , 2000 , 0)) > 0 )
     {
         cout << "[" << client_message << "][" << strlen(client_message) << "]" <<endl;
+        messageQueue.sendMessage(client_message);
     }
 
     if(read_size == 0)
