@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
 add_subdirectory(RaspMessageQueue)
 add_subdirectory(RaspServer)
+add_subdirectory(RaspOpenCV)
 add_subdirectory(RaspWiring)
