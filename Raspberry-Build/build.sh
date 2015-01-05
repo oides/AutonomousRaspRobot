@@ -1,0 +1,2 @@
+cmake ../Raspberry
+make
