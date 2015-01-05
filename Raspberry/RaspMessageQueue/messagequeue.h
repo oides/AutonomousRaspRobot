@@ -16,7 +16,7 @@ using namespace std;
 #define MQ_MESSAGE_PRIORITY 0
 
 class MessageQueue
-{    
+{
 private:
     int flags = O_RDWR | O_CREAT;
     struct mq_attr attr;
