@@ -1,6 +1,9 @@
 #include <iostream>
 #include "messagequeue.h"
 #include <string.h>
+#include <wiringPi.h>
+
+#define PIN_11 0
 
 using namespace std;
 
@@ -9,17 +12,25 @@ main()
 {
     MessageQueue messageQueue;
 
+    wiringPiSetup();
+    pinMode (PIN_11, OUTPUT) ;
+
     while(1)
     {
       	char* msg_buff = messageQueue.receiveMessage();
 
-        if (strcmp(FRENTE, msg_buff))
+        if (!strcmp(FRENTE, msg_buff))
+	{
                 cout << "Wiring Message Reicived: FRENTE" << endl;
-        else if (strcmp(RE, msg_buff))
+		digitalWrite (PIN_11, HIGH);
+		delay (3000);
+		digitalWrite (0, LOW);
+	}
+        else if (!strcmp(RE, msg_buff))
                 cout << "Wiring Message Reicived: RE" << endl;
-        else if (strcmp(ESQUERDA, msg_buff))
+        else if (!strcmp(ESQUERDA, msg_buff))
                 cout << "Wiring Message Reicived: ESQUERDA" << endl;
-        else if (strcmp(DIREITA, msg_buff))
+        else if (!strcmp(DIREITA, msg_buff))
 		cout << "Wiring Message Reicived: DIREITA" << endl;
 	else	cout << "Wiring Message Reicived: " << msg_buff << endl;
 
