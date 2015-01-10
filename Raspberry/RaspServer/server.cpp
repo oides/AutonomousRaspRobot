@@ -61,6 +61,16 @@ void Server::listeningMessages(int socket)
     while( (read_size = recv(socket , client_message , 2000 , 0)) > 0 )
     {
         cout << "[" << client_message << "][" << strlen(client_message) << "]" <<endl;
+
+	if (strcmp("w", client_message) || strcmp("W", client_message))
+		strncpy(client_message, FRENTE, MQ_MESSAGE_LENGTH);
+	else if (strcmp("a", client_message) || strcmp("A", client_message))
+		strncpy(client_message, ESQUERDA, MQ_MESSAGE_LENGTH);
+        else if (strcmp("s", client_message) || strcmp("S", client_message))
+                strncpy(client_message, RE, MQ_MESSAGE_LENGTH);
+        else if (strcmp("d", client_message) || strcmp("D", client_message))
+                strncpy(client_message, DIREITA, MQ_MESSAGE_LENGTH);
+
         messageQueue.sendMessage(client_message);
     }
 

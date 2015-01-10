@@ -4,7 +4,7 @@ MessageQueue::MessageQueue()
 {
     attr.mq_flags = 0;
     attr.mq_maxmsg = MQ_MAX_NUM_OF_MESSAGES;
-    attr.mq_msgsize = MQ_MESSAGE_MAX_LENGTH;
+    attr.mq_msgsize = MQ_MESSAGE_LENGTH;
     attr.mq_curmsgs = 0;
 
     mqd = mq_open(MQ_NAME, flags, MQ_MODE, &attr);
@@ -47,7 +47,7 @@ char* MessageQueue::receiveMessage()
 {
     cout << "Receiving message..." << endl;
 
-    int msg_len = mq_receive(mqd, msg_buff, MQ_MESSAGE_MAX_LENGTH, NULL);
+    int msg_len = mq_receive(mqd, msg_buff, MQ_MESSAGE_LENGTH, NULL);
 
     if(msg_len < 0)
     {
@@ -55,7 +55,7 @@ char* MessageQueue::receiveMessage()
     }
     else
     {
-        msg_buff[MQ_MESSAGE_MAX_LENGTH-1] = '\0';
+        msg_buff[MQ_MESSAGE_LENGTH-1] = '\0';
         cout << "Successfully received " << msg_len << " bytes" << endl;
         cout << "Message: " << msg_buff << endl;
     }
