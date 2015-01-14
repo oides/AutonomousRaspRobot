@@ -1,7 +1,7 @@
 #include <iostream>
 #include "messagequeue.h"
 #include <string.h>
-#include <wiringPi.h>
+//#include <wiringPi.h>
 
 #define PIN_11 0
 
@@ -12,8 +12,8 @@ main()
 {
     MessageQueue messageQueue;
 
-    wiringPiSetup();
-    pinMode (PIN_11, OUTPUT) ;
+    //wiringPiSetup();
+    //pinMode (PIN_11, OUTPUT) ;
 
     while(1)
     {
@@ -22,9 +22,9 @@ main()
         if (!strcmp(FRENTE, msg_buff))
 	{
                 cout << "Wiring Message Reicived: FRENTE" << endl;
-		digitalWrite (PIN_11, HIGH);
-		delay (3000);
-		digitalWrite (0, LOW);
+		//digitalWrite (PIN_11, HIGH);
+		//delay (3000);
+		//digitalWrite (0, LOW);
 	}
         else if (!strcmp(RE, msg_buff))
                 cout << "Wiring Message Reicived: RE" << endl;

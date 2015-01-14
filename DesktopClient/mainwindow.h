@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "raspclient.h"
+#include <QTime>
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +23,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     RaspClient raspClient;
+    QTime lastTime;
 };
 
 #endif // MAINWINDOW_H
