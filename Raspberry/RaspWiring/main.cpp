@@ -60,9 +60,16 @@ main()
 void
 turnOn(int motor)
 {
-	digitalWrite (motor, HIGH);
-	delay (330);
-	digitalWrite (motor, LOW);
+	std::thread t1(turnOnPins, this, motor);
+        t1.detach();
+}
+
+void
+turnOnPins(int motor)
+{
+        digitalWrite (motor, HIGH);
+        delay (330);
+        digitalWrite (motor, LOW);
 }
 
 void

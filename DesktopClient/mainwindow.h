@@ -5,6 +5,9 @@
 #include "raspclient.h"
 #include <QTime>
 
+#include<QMessageBox>
+#include<QKeyEvent>
+
 namespace Ui {
 class MainWindow;
 }
@@ -16,14 +19,15 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
-private slots:
-    void on_controlInput_textChanged(const QString &arg1);
+    void keyPressEvent(QKeyEvent*);
+    void keyReleaseEvent(QKeyEvent*);
 
 private:
     Ui::MainWindow *ui;
     RaspClient raspClient;
     QTime lastTime;
+    QSet<QString> keysPressed;
+    bool m_bFirstRelease;
 };
 
 #endif // MAINWINDOW_H

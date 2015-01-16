@@ -7,5 +7,6 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
+    a.setKeyboardInputInterval(300);
     return a.exec();
 }

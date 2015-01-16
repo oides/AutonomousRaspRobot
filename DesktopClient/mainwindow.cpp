@@ -13,18 +13,30 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_controlInput_textChanged(const QString &arg1)
+void MainWindow::keyPressEvent(QKeyEvent* e)
 {
-    if (!arg1.isEmpty())
+    QTime breakTime = this->lastTime.addMSecs(300);
+    if (breakTime < QTime::currentTime())
     {
-        ui->commandLabel->setText("Comando: " + arg1);
-        ui->controlInput->setText("");
+        keysPressed += e->text();
+        m_bFirstRelease = true;
+        this->lastTime = QTime::currentTime();
+    }
+}
 
-        QTime breakTime = this->lastTime.addMSecs(300);
-        if (breakTime < QTime::currentTime())
+void MainWindow::keyReleaseEvent(QKeyEvent* e)
+{
+    if(m_bFirstRelease)
+    {
+        foreach (const QString &key, keysPressed)
         {
-            raspClient.sendMessage(arg1.toUtf8().constData());
-            this->lastTime = QTime::currentTime();
+            ui->commandLabel->setText("Comando: " + key);
+            raspClient.sendMessage(e->text().toUtf8().constData());
+
+            cout << "EVENTO DEPOIS[" << key.toUtf8().constData() << "]" << endl;
         }
     }
+
+    m_bFirstRelease = false;
+    keysPressed -= e->text();
 }
