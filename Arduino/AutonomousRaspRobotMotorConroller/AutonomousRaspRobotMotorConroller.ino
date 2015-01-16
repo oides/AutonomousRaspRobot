@@ -48,9 +48,9 @@ void loop()
   irRe = digitalRead(inRePin);
   irEsquerda = digitalRead(inEsquerdaPin);
   irDireita = digitalRead(inDireitaPin);
-  
+
   existeMovimento = irFrente + irRe + irEsquerda + irDireita;
-  if (existeMovimento == 1)
+  if (existeMovimento != 0 && existeMovimento != 4)
   {
     if (irFrente != 0)
     {
@@ -81,17 +81,15 @@ void loop()
       digitalWrite(outDireita, HIGH);
     }
   }
-  else
-  {
-    analogWrite(outMotorAceleracao, LOW);
-    analogWrite(outFrente, LOW);
-    analogWrite(outRe, LOW);
-    
-    analogWrite(outMotorCurva, LOW);
-    analogWrite(outEsquerda, LOW);
-    analogWrite(outDireita, LOW);
-  }
   delay(50);
+
+  analogWrite(outMotorAceleracao, LOW);
+  analogWrite(outFrente, LOW);
+  analogWrite(outRe, LOW);
+  
+  analogWrite(outMotorCurva, LOW);
+  analogWrite(outEsquerda, LOW);
+  analogWrite(outDireita, LOW);
   
 /*  Serial.print("Frente: ");
   Serial.print(irFrente);

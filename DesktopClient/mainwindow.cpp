@@ -15,7 +15,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::keyPressEvent(QKeyEvent* e)
 {
-    QTime breakTime = this->lastTime.addMSecs(300);
+    QTime breakTime = this->lastTime.addMSecs(100);
     if (breakTime < QTime::currentTime())
     {
         keysPressed += e->text();
@@ -31,9 +31,8 @@ void MainWindow::keyReleaseEvent(QKeyEvent* e)
         foreach (const QString &key, keysPressed)
         {
             ui->commandLabel->setText("Comando: " + key);
-            raspClient.sendMessage(e->text().toUtf8().constData());
-
             cout << "EVENTO DEPOIS[" << key.toUtf8().constData() << "]" << endl;
+            raspClient.sendMessage(key.toUtf8().constData());
         }
     }
 
