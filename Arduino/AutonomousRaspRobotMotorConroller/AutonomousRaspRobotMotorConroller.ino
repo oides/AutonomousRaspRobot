@@ -2,21 +2,27 @@
  Modulo para controle de motores.
  Recebe como entrada sinais vindos do raspberry.
 */
-// Entredas digitais...
+// Entradas digitais...
 int inFrentePin = 2;
 int inRePin = 4;
 int inEsquerdaPin = 7;
 int inDireitaPin = 8;
 
 // Saidas PWM...
-int outFrente = 3;
-int outEsquerda = 5;
+int outMotorAceleracao = 3;
+int outFrente = 5;
+int outRe = 6;
+
+int outMotorCurva = 11;
+int outEsquerda = 10;
+int outDireita = 9;
 
 // Variaveis locais para leitura dos comandos...
 int irFrente;
 int irRe;
 int irEsquerda;
 int irDireita;
+int existeMovimento;
 
 void setup()
 {
@@ -27,8 +33,13 @@ void setup()
   pinMode(inEsquerdaPin, INPUT);
   pinMode(inDireitaPin, INPUT);
   
+  pinMode(outMotorAceleracao, OUTPUT);
   pinMode(outFrente, OUTPUT);
+  pinMode(outRe, OUTPUT);
+  
+  pinMode(outMotorCurva, OUTPUT);
   pinMode(outEsquerda, OUTPUT);
+  pinMode(outDireita, OUTPUT);
 }
 
 void loop()
@@ -38,7 +49,51 @@ void loop()
   irEsquerda = digitalRead(inEsquerdaPin);
   irDireita = digitalRead(inDireitaPin);
   
-  Serial.print("Frente: ");
+  existeMovimento = irFrente + irRe + irEsquerda + irDireita;
+  if (existeMovimento == 1)
+  {
+    if (irFrente != 0)
+    {
+      Serial.print("[FRENTE]\n");
+      digitalWrite(outMotorAceleracao, HIGH);
+      digitalWrite(outFrente, HIGH);
+      digitalWrite(outRe, LOW);
+    }
+    if (irRe != 0)
+    {
+      Serial.print("[RE]\n");
+      digitalWrite(outMotorAceleracao, HIGH);
+      digitalWrite(outFrente, LOW);
+      digitalWrite(outRe, HIGH);
+    }
+    if (irEsquerda != 0)
+    {
+      Serial.print("[RE]\n");
+      digitalWrite(outMotorCurva, HIGH);
+      digitalWrite(outEsquerda, HIGH);
+      digitalWrite(outDireita, LOW);
+    }
+    if (irDireita != 0)
+    {
+      Serial.print("[RE]\n");
+      digitalWrite(outMotorCurva, HIGH);
+      digitalWrite(outEsquerda, LOW);
+      digitalWrite(outDireita, HIGH);
+    }
+  }
+  else
+  {
+    analogWrite(outMotorAceleracao, LOW);
+    analogWrite(outFrente, LOW);
+    analogWrite(outRe, LOW);
+    
+    analogWrite(outMotorCurva, LOW);
+    analogWrite(outEsquerda, LOW);
+    analogWrite(outDireita, LOW);
+  }
+  delay(50);
+  
+/*  Serial.print("Frente: ");
   Serial.print(irFrente);
   Serial.print("\n");
   
@@ -52,6 +107,7 @@ void loop()
   
   Serial.print("Direita: ");
   Serial.print(irDireita);
-  Serial.print("\n");
+  Serial.print("\n\n");*/
+  
   
 }
