@@ -1,22 +1,26 @@
-#include <iostream>
-#include "messagequeue.h"
-#include <string.h>
-#include <wiringPi.h>
+//#include <iostream>
+//#include "messagequeue.h"
+//#include <string.h>
+//#include <thread>
+//#include <wiringPi.h>
+#include "wiring.h"
 
-#define PIN_FRENTE_11 0
+/*#define PIN_FRENTE_11 0
 #define PIN_RE_13 2
 #define PIN_ESQUERDA_15 3
 #define PIN_DIREITA_16 4
+*/
+//using namespace std;
 
-using namespace std;
-
-void turnOn(int);
-void init();
+//void turnOn(int);
+//void init();
 
 int
 main()
 {
-    MessageQueue messageQueue;
+    Server server;
+    server.start();
+/*    MessageQueue messageQueue;
 
     wiringPiSetup();
     pinMode (PIN_FRENTE_11, OUTPUT);
@@ -78,5 +82,5 @@ init()
 	digitalWrite (PIN_FRENTE_11, LOW);
         digitalWrite (PIN_RE_13, LOW);
         digitalWrite (PIN_ESQUERDA_15, LOW);
-        digitalWrite (PIN_DIREITA_16, LOW);
+        digitalWrite (PIN_DIREITA_16, LOW);*/
 }
