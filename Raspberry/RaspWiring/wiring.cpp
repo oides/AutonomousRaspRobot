@@ -80,7 +80,7 @@ Server::turnOnPins(int motor, int* pinCount)
 	(*pinCount)++;
 	lockMotor.unlock();
 
-        delay (300);	
+        delay (315);	
 
 	lockMotor.lock();
 	(*pinCount)--;
