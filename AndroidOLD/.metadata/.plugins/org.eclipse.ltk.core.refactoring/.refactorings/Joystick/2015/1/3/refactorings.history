@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;Joystick/res/drawable-xhdpi/imagemJoystick.png&apos; to &apos;imagem_joystick.png&apos;" description="Rename resource &apos;imagemJoystick.png&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/drawable-xhdpi/imagemJoystick.png" name="imagem_joystick.png" stamp="1421441070514" updateReferences="true"/>
-</session>

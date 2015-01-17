@@ -1,2 +1,0 @@
-INDEX VERSION 1.126+/home/eudes/Desenvolvimento/AutonomousRaspRobot/Android/.metadata/.plugins/org.eclipse.jdt.core
-3679861299.index
