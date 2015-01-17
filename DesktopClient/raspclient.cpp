@@ -10,7 +10,7 @@ RaspClient::RaspClient()
     }
     cout << "Socket created" << endl;
 
-    server.sin_addr.s_addr = inet_addr("192.168.1.2");
+    server.sin_addr.s_addr = inet_addr("192.168.1.5");
     server.sin_family = AF_INET;
     server.sin_port = htons( 8888 );
 
