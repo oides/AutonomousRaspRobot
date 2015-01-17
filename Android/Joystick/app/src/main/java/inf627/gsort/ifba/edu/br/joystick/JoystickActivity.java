@@ -25,22 +25,31 @@ public class JoystickActivity extends Activity {
         this.joystickButtons = new JoystickButtons();
 
         imageView.setOnTouchListener(new View.OnTouchListener() {
+
+            float x, y;
+
+            int action;
+            int pointerIndex;
+            int fingerId;
+
+            boolean frente;
+            boolean re;
+            boolean esquerda;
+            boolean direita;
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                int action = event.getAction() & MotionEvent.ACTION_MASK;
-                int pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-                int fingerId = event.getPointerId(pointerIndex);
-
-                float x = 0;
-                float y = 0;
+                action = event.getAction() & MotionEvent.ACTION_MASK;
+                pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+                fingerId = event.getPointerId(pointerIndex);
 
                 if (event.getAction() == MotionEvent.ACTION_MOVE) {
 
-                    boolean frente = false;
-                    boolean re = false;
-                    boolean esquerda = false;
-                    boolean direita = false;
+                    frente = false;
+                    re = false;
+                    esquerda = false;
+                    direita = false;
 
                     int pointerCount = event.getPointerCount();
 
@@ -116,6 +125,34 @@ public class JoystickActivity extends Activity {
             }
 
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                joystickButtons.init();
+            }
+        };
+
+        Thread t = new Thread(r);
+        t.start();
+    };
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                joystickButtons.destroy();
+            }
+        };
+
+        Thread t = new Thread(r);
+        t.start();
     }
 }
 

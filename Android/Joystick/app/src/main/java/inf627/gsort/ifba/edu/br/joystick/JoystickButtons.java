@@ -12,6 +12,20 @@ public class JoystickButtons {
     private boolean esquerda = false;
     private boolean direita = false;
 
+    private RaspClient raspClient;
+
+    public JoystickButtons() {
+        this.raspClient = new RaspClient();
+    }
+
+    public void init() {
+        raspClient.init();
+    }
+
+    public void destroy() {
+        raspClient.destroy();
+    }
+
     public void startFrente() {
         if (!this.frente) {
             this.frente = true;
@@ -123,6 +137,7 @@ public class JoystickButtons {
     public void executeFrente() {
         Log.v("Joystick", "INICIO FRENTE");
         while (this.frente) {
+            raspClient.sendMessage("w\0");
             sleep();
         }
         Log.v("Joystick", "FIM FRENTE");
@@ -131,6 +146,7 @@ public class JoystickButtons {
     public void executeRe() {
         Log.v("Joystick", "INICIO RE");
         while (this.re) {
+            raspClient.sendMessage("s\0");
             sleep();
         }
         Log.v("Joystick", "FIM RE");
@@ -139,6 +155,7 @@ public class JoystickButtons {
     public void executeEsquerda() {
         Log.v("Joystick", "INICIO ESQUERDA");
         while (this.esquerda) {
+            raspClient.sendMessage("a\0");
             sleep();
         }
         Log.v("Joystick", "FIM ESQUERDA");
@@ -147,6 +164,7 @@ public class JoystickButtons {
     public void executeDireita() {
         Log.v("Joystick", "INICIO DIREITA");
         while (this.direita) {
+            raspClient.sendMessage("d\0");
             sleep();
         }
         Log.v("Joystick", "FIM DIREITA");
@@ -155,7 +173,7 @@ public class JoystickButtons {
     private void sleep() {
         try
         {
-            Thread.sleep(50);
+            Thread.sleep(300);
         } catch (InterruptedException e)
         {
             e.printStackTrace();
