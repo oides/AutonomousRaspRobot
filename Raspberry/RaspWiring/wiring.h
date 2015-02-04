@@ -8,6 +8,9 @@
 #include <thread>
 #include <mutex>
 
+#define PIN_MOTOR_TRACAO_7 7
+#define PIN_CURVA_12 1
+
 #define PIN_FRENTE_11 0
 #define PIN_RE_13 2
 #define PIN_ESQUERDA_15 3

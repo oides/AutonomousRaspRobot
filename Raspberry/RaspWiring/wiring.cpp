@@ -7,6 +7,8 @@ Server::Server()
     pinMode (PIN_RE_13, OUTPUT);
     pinMode (PIN_ESQUERDA_15, OUTPUT);
     pinMode (PIN_DIREITA_16, OUTPUT);
+    pinMode (PIN_TRACAO_7, OUTPUT);
+    pinMode (PIN_CURVA_12, OUTPUT);
 
     init();
 
