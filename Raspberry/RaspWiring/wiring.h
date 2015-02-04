@@ -8,7 +8,7 @@
 #include <thread>
 #include <mutex>
 
-#define PIN__TRACAO_7 7
+#define PIN_TRACAO_7 7
 #define PIN_CURVA_12 1
 
 #define PIN_FRENTE_11 0
