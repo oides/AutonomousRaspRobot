@@ -43,7 +43,7 @@ Server::start()
         else if (!strcmp(DIREITA, msg_buff))
         {
                 cout << "Wiring Message Reicived: DIREITA" << endl;
-                turnOn(PIN_TRACAO_12, PIN_DIREITA_16, &pinCount16);
+                turnOn(PIN_CURVA_12, PIN_DIREITA_16, &pinCount16);
         }
         else    cout << "Wiring Message Reicived: " << msg_buff << endl;
 
