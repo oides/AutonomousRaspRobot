@@ -28,22 +28,22 @@ Server::start()
         if (!strcmp(FRENTE, msg_buff))
         {
                 cout << "Wiring Message Reicived: FRENTE" << endl;
-                turnOn(PIN_FRENTE_11, &pinCount11);
+                turnOn(PIN_TRACAO_7, PIN_FRENTE_11, &pinCount11);
         }
         else if (!strcmp(RE, msg_buff))
         {
                 cout << "Wiring Message Reicived: RE" << endl;
-                turnOn(PIN_RE_13, &pinCount13);
+                turnOn(PIN_TRACAO_7, PIN_RE_13, &pinCount13);
         }
         else if (!strcmp(ESQUERDA, msg_buff))
         {
                 cout << "Wiring Message Reicived: ESQUERDA" << endl;
-                turnOn(PIN_ESQUERDA_15, &pinCount15);
+                turnOn(PIN_CURVA_12, PIN_ESQUERDA_15, &pinCount15);
         }
         else if (!strcmp(DIREITA, msg_buff))
         {
                 cout << "Wiring Message Reicived: DIREITA" << endl;
-                turnOn(PIN_DIREITA_16, &pinCount16);
+                turnOn(PIN_TRACAO_12, PIN_DIREITA_16, &pinCount16);
         }
         else    cout << "Wiring Message Reicived: " << msg_buff << endl;
 
@@ -57,23 +57,26 @@ Server::init()
         digitalWrite (PIN_RE_13, LOW);
         digitalWrite (PIN_ESQUERDA_15, LOW);
         digitalWrite (PIN_DIREITA_16, LOW);
+	digitalWrite (PIN_TRACAO_7, LOW);
+	digitalWrite (PIN_CURVA_12, LOW);
 }
 
 void
-Server::turnOn(int motor, int* pinCount)
+Server::turnOn(int motor, int sentido, int* pinCount)
 {
-        std::thread t1(&Server::turnOnPins, this, motor, pinCount);
+        std::thread t1(&Server::turnOnPins, this, motor, sentido, pinCount);
         t1.detach();
 }
 
 void
-Server::turnOnPins(int motor, int* pinCount)
+Server::turnOnPins(int motor, int sentido, int* pinCount)
 {
 	lockMotor.lock();
 	if(*pinCount == 0)
 	{
 		cout << "Ligando Motor [" << motor << "][" << *pinCount << "]" << endl;
 	        digitalWrite (motor, HIGH);
+		digitalWrite (sentido, HIGH);
 	}
 	else
 	{
@@ -89,6 +92,7 @@ Server::turnOnPins(int motor, int* pinCount)
 	if(*pinCount == 0)
 	{
 	        digitalWrite (motor, LOW);
+		digitalWrite (sentido, LOW);
 		cout << "Desligando Motor [" << motor << "][" << *pinCount << "]" << endl;
 	}
 	else

@@ -23,8 +23,8 @@ class Server
 private:
     MessageQueue messageQueue;
     void init();
-    void turnOn(int, int*);
-    void turnOnPins(int, int*);
+    void turnOn(int, int, int*);
+    void turnOnPins(int, int, int*);
     int pinCount11, pinCount13, pinCount15, pinCount16;
     std::mutex lockMotor;
 
