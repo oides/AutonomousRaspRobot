@@ -6,8 +6,7 @@ using namespace std;
 int main()
 {
     OpenCV openCV;
-    openCV.hello();
+    openCV.initRecog();
 
     return 0;
 }
-

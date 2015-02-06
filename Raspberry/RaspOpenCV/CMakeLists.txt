@@ -7,3 +7,7 @@ include_directories(${RASP_MESSAGE_QUEUE_INCLUDE})
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 
 target_link_libraries(${PROJECT_NAME} RaspMessageQueue)
+target_link_libraries(${PROJECT_NAME} opencv_core)
+target_link_libraries(${PROJECT_NAME} opencv_imgproc)
+target_link_libraries(${PROJECT_NAME} opencv_highgui)
+target_link_libraries(${PROJECT_NAME} opencv_objdetect)
