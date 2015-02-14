@@ -23,9 +23,9 @@ void OpenCV::recognition()
 
     //-- 2. Read the video stream
     capture = cvCaptureFromCAM( -1 );
-    cvSetCaptureProperty(capture, CV_CAP_PROP_FPS, 1);
-    cvSetCaptureProperty(capture, CV_CAP_PROP_FRAME_WIDTH, 640);
-    cvSetCaptureProperty(capture, CV_CAP_PROP_FRAME_HEIGHT, 480);
+    cvSetCaptureProperty(capture, CV_CAP_PROP_FPS, 10);
+    cvSetCaptureProperty(capture, CV_CAP_PROP_FRAME_WIDTH, 320);
+    cvSetCaptureProperty(capture, CV_CAP_PROP_FRAME_HEIGHT, 240);
 
     if( capture )
     {
