@@ -31,11 +31,14 @@ private:
      RNG rng;
      int num;
      bool canCapture;
+     Mat frame;
+
+     void saveImage (Mat mat);
 public:
     void initRecog();	
-    void recognition();
+    void capture();
     void detectAndDisplay( Mat frame );
-    void saveImage (Mat mat);
+    void detect();
 };
 
 #endif // OPENCV_H

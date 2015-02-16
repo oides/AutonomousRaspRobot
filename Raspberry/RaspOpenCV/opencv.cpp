@@ -4,74 +4,78 @@ void OpenCV::initRecog()
 {
      face_cascade_name = "haarcascade_frontalface_alt.xml";
      eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
-     dirFace = "/home/pi/Dados/Fotos/";
+     dirFace = "/home/novais/Dados/Fotos/"; 
      rng = 12345;
-     num = 0;
- 	
-     recognition();
+     num = 0;  
+     canCapture = true;
  }
 
-void OpenCV::recognition()
+void OpenCV::capture()
 {
-    printf("Iniciou Aplicacao\n");
     CvCapture* capture;
-    Mat frame;
-    canCapture = true; 
-    int c = waitKey(10);
-	printf("canCapture = true\n");
+
     //-- 1. Load the cascades
     if( !face_cascade.load( face_cascade_name ) ){ printf("--(!)Error loading1\n"); };
     if( !eyes_cascade.load( eyes_cascade_name ) ){ printf("--(!)Error loading2\n"); };
 
     //-- 2. Read the video stream
     capture = cvCaptureFromCAM( -1 );
-    cvSetCaptureProperty(capture, CV_CAP_PROP_FPS, 10);
-    cvSetCaptureProperty(capture, CV_CAP_PROP_FRAME_WIDTH, 320);
-    cvSetCaptureProperty(capture, CV_CAP_PROP_FRAME_HEIGHT, 240);
+//    cvSetCaptureProperty(capture, CV_CAP_PROP_FPS, 1);
+//    cvSetCaptureProperty(capture, CV_CAP_PROP_FRAME_WIDTH, 800);
+//    cvSetCaptureProperty(capture, CV_CAP_PROP_FRAME_HEIGHT, 600);
 
     if( capture )
     {
-      //thread.Start();
-      printf("Iniciada Captura\n");
-
-      while( true )
-      {	
-	if(canCapture){
-	printf("canCapture = true\n");
+ 	printf("Iniciada Captura\n");
+	while( true )
+        {	
+	   if(canCapture){
 		frame = cvQueryFrame( capture );
-		printf("Executar deteccao do Frame\n");
 
 	    	//-- 3. Apply the classifier to the frame
 		if( !frame.empty() )
 		{
-		    detectAndDisplay( frame ); 
+		    printf("Frame\n");
+		    canCapture = false;
+		    //detectAndDisplay( frame ); 
 		}
 		else
 		{ 
 		    printf(" --(!) No captured frame -- Break!");  
 		    break;
 		}
-	}
+	    }
+	 }
+    }
+}
 
-
-        if( (char)c == 'c' ) 
-	{
-	    break;
-        }
+void OpenCV::detect()
+{
+      /*for (int i = 0; i < 10000; i++)
+      {
+          printf("Detect");
+      }*/
+      printf("Detect\n");
+      while(true){
+         if(!canCapture){
+ 	    canCapture = false;
+            printf("Entrou1\n");
+	    if (!frame.empty()){	 
+               printf("Entrou2\n");
+  	       detectAndDisplay( frame ); 
+            }
+         }
       }
-   }   
 }
 
 void OpenCV::detectAndDisplay( Mat frame )
 {
-  canCapture = false;
-	printf("canCapture = false\n");
   std::vector<Rect> faces;
   Mat frame_gray;
 
   cvtColor( frame, frame_gray, CV_BGR2GRAY );
   equalizeHist( frame_gray, frame_gray );
-    printf("Detectar face\n");
+    printf("Detectar face\n\n");
   //-- Detect faces
   face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(30, 30) );
 
@@ -93,9 +97,8 @@ void OpenCV::detectAndDisplay( Mat frame )
     
     //moviment.executeFrente();
   }
-
-   canCapture = true;	
-   printf("canCapture2 = true\n");
+   canCapture = true;
+   printf("canCapture = true\n");
  }
 
 void OpenCV::saveImage (Mat mat) 
