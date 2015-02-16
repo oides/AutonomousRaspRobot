@@ -16,7 +16,9 @@ void OpenCV::recognition()
     printf("Iniciou Aplicacao\n");
     CvCapture* capture;
     Mat frame;
-
+    canCapture = true; 
+    int c = waitKey(10);
+	printf("canCapture = true\n");
     //-- 1. Load the cascades
     if( !face_cascade.load( face_cascade_name ) ){ printf("--(!)Error loading1\n"); };
     if( !eyes_cascade.load( eyes_cascade_name ) ){ printf("--(!)Error loading2\n"); };
@@ -34,21 +36,24 @@ void OpenCV::recognition()
 
       while( true )
       {	
-        frame = cvQueryFrame( capture );
-        printf("Executar deteccao do Frame\n");
+	if(canCapture){
+	printf("canCapture = true\n");
+		frame = cvQueryFrame( capture );
+		printf("Executar deteccao do Frame\n");
 
-    	//-- 3. Apply the classifier to the frame
-        if( !frame.empty() )
-        {
-            detectAndDisplay( frame ); 
-	}
-        else
-        { 
-	    printf(" --(!) No captured frame -- Break!");  
-	    break;
+	    	//-- 3. Apply the classifier to the frame
+		if( !frame.empty() )
+		{
+		    detectAndDisplay( frame ); 
+		}
+		else
+		{ 
+		    printf(" --(!) No captured frame -- Break!");  
+		    break;
+		}
 	}
 
-        int c = waitKey(10);
+
         if( (char)c == 'c' ) 
 	{
 	    break;
@@ -59,6 +64,8 @@ void OpenCV::recognition()
 
 void OpenCV::detectAndDisplay( Mat frame )
 {
+  canCapture = false;
+	printf("canCapture = false\n");
   std::vector<Rect> faces;
   Mat frame_gray;
 
@@ -86,7 +93,9 @@ void OpenCV::detectAndDisplay( Mat frame )
     
     //moviment.executeFrente();
   }
-	
+
+   canCapture = true;	
+   printf("canCapture2 = true\n");
  }
 
 void OpenCV::saveImage (Mat mat) 

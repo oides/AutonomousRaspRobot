@@ -30,6 +30,7 @@ private:
      CascadeClassifier eyes_cascade;
      RNG rng;
      int num;
+     bool canCapture;
 public:
     void initRecog();	
     void recognition();
