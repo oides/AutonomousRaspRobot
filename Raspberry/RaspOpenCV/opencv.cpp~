@@ -54,7 +54,7 @@ void OpenCV::detectAndDisplay( Mat frame )
       //moviment.executeFrente();
   }
    tempCanCapture = true;
-   printf("tempCanCapture = true\n");
+   printf("canCapture = true\n");
  }
 
 void OpenCV::saveImage (Mat mat) 

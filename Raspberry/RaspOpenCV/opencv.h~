@@ -24,7 +24,7 @@ private:
      CascadeClassifier eyes_cascade;
      RNG rng;
      int num;
-     bool tempCanCapture;
+     bool canCapture;
      Mat frame;
 
      void saveImage (Mat mat);

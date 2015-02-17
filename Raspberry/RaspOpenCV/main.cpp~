@@ -44,9 +44,9 @@ int main()
     openCV.init(canCapture);
     printf("Iniciou Aplicacao\n");
 
-    chamaCaptura(cap);
-
     chamaOpenCV(openCV);
+
+    chamaCaptura(cap);
 
     return 0;
 }
