@@ -1,6 +1,6 @@
 #include "opencv.h"
 
-void OpenCV::init(bool &canCapture)
+void OpenCV::init(bool &canCapture, Mat &frame)
 {
      face_cascade_name = "haarcascade_frontalface_alt.xml";
      eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
@@ -8,6 +8,7 @@ void OpenCV::init(bool &canCapture)
      rng = 12345;
      num = 0;  
      tempCanCapture = canCapture;
+     tempFrame = frame;
  }
 void OpenCV::detect()
 {
@@ -16,20 +17,20 @@ void OpenCV::detect()
          if(!tempCanCapture){
  	    tempCanCapture = false;
             printf("Entrou1\n");
-	    if (!frame.empty()){	 
+	    if (!tempFrame.empty()){	 
                printf("Entrou2\n");
-  	       detectAndDisplay( frame ); 
+  	       detectFace( tempFrame ); 
             }
          }
       }
 }
 
-void OpenCV::detectAndDisplay( Mat frame )
+void OpenCV::detectFace( Mat tempFrame )
 {
   std::vector<Rect> faces;
   Mat frame_gray;
 
-  cvtColor( frame, frame_gray, CV_BGR2GRAY );
+  cvtColor( tempFrame, frame_gray, CV_BGR2GRAY );
   equalizeHist( frame_gray, frame_gray );
     printf("Detectar face\n\n");
   //-- Detect faces
@@ -47,7 +48,7 @@ void OpenCV::detectAndDisplay( Mat frame )
       //eyes_cascade.detectMultiScale( faceROI, eyes, 1.1, 2, 0 |CV_HAAR_SCALE_IMAGE, Size(30, 30) );
       //if(eyes.size() == 2){
 	  printf("Identificou e tirou uma foto!\n");
-    	  saveImage(frame);
+    	  saveImage(tempFrame);
 	  printf("Guardou!\n");	
       //}
     

@@ -25,12 +25,12 @@ private:
      RNG rng;
      int num;
      bool tempCanCapture;
-     Mat frame;
+     Mat tempFrame;
 
      void saveImage (Mat mat);
 public:
-    void init(bool &canCapture);
-    void detectAndDisplay( Mat frame );
+    void init(bool &canCapture, Mat &frame);
+    void detectFace( Mat frame );
     void detect();
 };
 

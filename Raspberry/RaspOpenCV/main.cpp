@@ -36,12 +36,13 @@ void chamaCaptura(Capture cap){
 int main()
 {
     bool canCapture = true;
+    Mat frame;
 
     Capture cap;
-    cap.init(canCapture);
+    cap.init(canCapture, frame);
 
     OpenCV openCV;
-    openCV.init(canCapture);
+    openCV.init(canCapture, frame);
     printf("Iniciou Aplicacao\n");
 
     chamaCaptura(cap);

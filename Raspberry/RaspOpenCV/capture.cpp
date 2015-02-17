@@ -1,10 +1,11 @@
 #include "capture.h"
 
-void Capture::init(bool &canCapture)
+void Capture::init(bool &canCapture, Mat &frame)
 {
      face_cascade_name = "haarcascade_frontalface_alt.xml";
      eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
      tempCanCapture = canCapture;
+     tempFrame = frame;
  }
 
 void Capture::capture()
@@ -27,10 +28,10 @@ void Capture::capture()
 	while( true )
         {	
 	   if(tempCanCapture){
-		frame = cvQueryFrame( capture );
+		tempFrame = cvQueryFrame( capture );
 
 	    	//-- 3. Apply the classifier to the frame
-		if( !frame.empty() )
+		if( !tempFrame.empty() )
 		{
 		    printf("Frame\n");
 		    tempCanCapture = false;

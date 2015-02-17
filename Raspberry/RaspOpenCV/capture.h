@@ -22,10 +22,10 @@ private:
      CascadeClassifier face_cascade;
      CascadeClassifier eyes_cascade;
      bool tempCanCapture;
-     Mat frame;
+     Mat tempFrame;
 
 public:
-    void init(bool &canCapture);	
+    void init(bool &canCapture, Mat &frame);	
     void capture();
 };
 

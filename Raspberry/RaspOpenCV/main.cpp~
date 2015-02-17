@@ -36,6 +36,7 @@ void chamaCaptura(Capture cap){
 int main()
 {
     bool canCapture = true;
+    Mat frame;
 
     Capture cap;
     cap.init(canCapture);
@@ -44,9 +45,9 @@ int main()
     openCV.init(canCapture);
     printf("Iniciou Aplicacao\n");
 
-    chamaOpenCV(openCV);
-
     chamaCaptura(cap);
+
+    chamaOpenCV(openCV);
 
     return 0;
 }
