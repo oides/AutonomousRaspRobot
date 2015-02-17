@@ -29,7 +29,6 @@ private:
 public:
     //void init(bool &canCapture, Mat &frame);
     void detectFace(bool &canCapture, Mat &frame, int &num);
-    void startNum();
     //void detect(Mat &frame);
 };
 

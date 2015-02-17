@@ -14,8 +14,6 @@
 using namespace std;
 using namespace cv;
 
-//cv::VideoCapture capture;
-
 class Capture
 {
 private:
@@ -27,8 +25,7 @@ private:
      Mat *tempFrame;
 public:
     void init(bool &canCapture, Mat &frame);	
-    //void capture();
-    void capture(Mat &frame, VideoCapture &capture);
+    void capture(Mat &frame);
 };
 
 #endif // OPENCV_H

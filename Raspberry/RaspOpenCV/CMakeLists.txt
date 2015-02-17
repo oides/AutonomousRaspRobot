@@ -5,9 +5,9 @@ aux_source_directory(. SRC_LIST)
 include_directories(${RASP_MESSAGE_QUEUE_INCLUDE})
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
-if(UNIX)
-    SET( ENV{LD_LIBRARY_PATH} /usr/lib/x86_64-linux-gnu/libv4l/v4l1compat.so)
-endif()
+##if(UNIX)
+##    SET( ENV{LD_LIBRARY_PATH} /usr/lib/x86_64-linux-gnu/libv4l/v4l1compat.so)
+##endif()
 
 target_link_libraries(${PROJECT_NAME} RaspMessageQueue)
 target_link_libraries(${PROJECT_NAME} opencv_core)

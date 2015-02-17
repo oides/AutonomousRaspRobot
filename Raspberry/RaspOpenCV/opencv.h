@@ -27,9 +27,7 @@ private:
      void saveImage (Mat &frame, int &num);
      void printBuild();
 public:
-    //void init(bool &canCapture, Mat &frame);
     void detectFace(bool &canCapture, Mat &frame, int &num);
-    //void detect(Mat &frame);
 };
 
 #endif // OPENCV_H
