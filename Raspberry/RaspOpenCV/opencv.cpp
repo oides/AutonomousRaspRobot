@@ -49,6 +49,7 @@ void OpenCV::startNum()
 void OpenCV::detectFace(bool &canCapture, Mat &frame)
 {
      canCapture = false;
+     printBuild();
      printf("canCapture = %s\n", canCapture ? "true":"false");
 
      dirFace = "/home/novais/Dados/Fotos/"; 
@@ -60,12 +61,9 @@ void OpenCV::detectFace(bool &canCapture, Mat &frame)
      if( !eyes_cascade.load( eyes_cascade_name ) ){ printf("--(!)Error loading2\n"); };
 
   std::vector<Rect> faces;
-  Mat frame_external;
   Mat frame_gray;
-  frame_external = frame;
- // saveImage(frame_external);
 
-  cvtColor( frame_external, frame_gray, CV_BGR2GRAY );
+  cvtColor( frame, frame_gray, CV_BGR2GRAY );
   equalizeHist( frame_gray, frame_gray );
     printf("Detectar face\n\n");
   //-- Detect faces
@@ -83,7 +81,7 @@ void OpenCV::detectFace(bool &canCapture, Mat &frame)
       //eyes_cascade.detectMultiScale( faceROI, eyes, 1.1, 2, 0 |CV_HAAR_SCALE_IMAGE, Size(30, 30) );
       //if(eyes.size() == 2){
 	  printf("Identificou e tirou uma foto!\n");
-    	  saveImage(frame_external);
+    	  saveImage(frame);
 	  printf("Guardou!\n");	
       //}
     
@@ -91,7 +89,15 @@ void OpenCV::detectFace(bool &canCapture, Mat &frame)
   }
    canCapture = true;
    printf("canCapture = %s\n", canCapture ? "true":"false");
+     printBuild();
  }
+
+void OpenCV::printBuild(){
+    time_t rawtime;
+    struct tm * timeinfo();
+    time (&rawtime);
+    printf("Tempo: %s", ctime(&rawtime));
+}
 
 void OpenCV::saveImage (Mat &frame) 
 {
@@ -102,7 +108,7 @@ void OpenCV::saveImage (Mat &frame)
 	store_path = sstm.str();
 
 	num = num + 1;
-
+        
 	bool write_success = imwrite(store_path, frame);
 	if (write_success == true ) {
 		printf("Sucesso ao armanezar imagem!");

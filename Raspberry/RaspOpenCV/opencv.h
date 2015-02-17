@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <iostream>
+#include <time.h>
 
 using namespace std;
 using namespace cv;
@@ -25,6 +26,7 @@ private:
      RNG rng;
      int num;
      void saveImage (Mat &frame);
+     void printBuild();
 public:
     //void init(bool &canCapture, Mat &frame);
     void detectFace(bool &canCapture, Mat &frame);
