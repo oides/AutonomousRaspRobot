@@ -2,6 +2,7 @@
 #include "opencv.h"
 #include "capture.h"
 #include <pthread.h>
+#include <time.h>
 
 using namespace std;
 
@@ -37,6 +38,13 @@ void chamaCaptura(Capture cap){
     printf("Chamou Thread de captura\n");
 }*/
 
+void printBuild(){
+    time_t rawtime;
+    struct tm * timeinfo();
+    time (&rawtime);
+    printf("Tempo: %s", ctime(&rawtime));
+}
+
 int main()
 {
     canCapture = true;
@@ -58,6 +66,7 @@ int main()
     while(true){	
 
         if(canCapture){
+           printBuild();
            capture >> frame;
            //chamaCaptura(cap); 
 	   chamaOpenCV(openCV);

@@ -47,7 +47,7 @@ void OpenCV::detectFace(bool &canCapture, Mat &frame, int &num)
      printBuild();
      printf("canCapture = %s\n", canCapture ? "true":"false");
 
-     dirFace = "/home/novais/Dados/Fotos/"; 
+     dirFace = "/home/pi/Dados/Fotos/"; 
      face_cascade_name = "haarcascade_frontalface_alt.xml";
      eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
      rng = 12345; 

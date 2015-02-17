@@ -41,11 +41,6 @@ void OpenCV::init(bool &canCapture, Mat &frame)
       //}
 }*/
 
-void OpenCV::startNum()
-{
-    num = 0;
-}
-
 void OpenCV::detectFace(bool &canCapture, Mat &frame, int &num)
 {
      canCapture = false;
