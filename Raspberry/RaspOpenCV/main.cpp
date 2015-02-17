@@ -1,5 +1,6 @@
 #include <iostream>
 #include "opencv.h"
+#include "moviment.h"
 #include <pthread.h>
 #include <time.h>
 
@@ -8,19 +9,48 @@ using namespace std;
 bool canCapture;
 Mat frame;
 int num;
+bool walk;
 
-void *processing_image(void* param)
+void *processing_face(void* param)
 {
     OpenCV *openCV = (OpenCV*)param;
     openCV->detectFace(canCapture, frame, num);
 }
 
-void chamaOpenCV(OpenCV openCV){
-    printf("Vai chamar Thread de deteccao\n");
-    pthread_t processingImg;
-    pthread_create(&processingImg, NULL, &processing_image, &openCV);
-    pthread_join(processingImg,NULL);    
-    printf("Finalizou Thread de deteccao\n");
+void chamaOpenCVFace(OpenCV openCV){
+    printf("Vai chamar Thread de FACE\n");
+    pthread_t processingFace;
+    pthread_create(&processingFace, NULL, &processing_face, &openCV);
+    pthread_join(processingFace,NULL);    
+    printf("Finalizou Thread de FACE\n\n");
+}
+
+void *processing_color(void* param)
+{
+    OpenCV *openCV = (OpenCV*)param;
+    openCV->detectColor(canCapture, frame, num);
+}
+
+void chamaOpenCVColor(OpenCV openCV){
+    printf("Vai chamar Thread de Cor\n");
+    pthread_t processingColor;
+    pthread_create(&processingColor, NULL, &processing_color, &openCV);
+    pthread_join(processingColor,NULL);    
+    printf("Finalizou Thread de Cor\n\n");
+}
+
+void *moviment_car(void* param)
+{
+    Moviment *mov = (Moviment*)param;
+    mov->startMoviment(walk);
+}
+
+void chamaMoviment(Moviment mov){
+    printf("Vai chamar Thread de movimento\n");
+    pthread_t movimentCar;
+    pthread_create(&movimentCar, NULL, &moviment_car, &mov);
+    pthread_join(movimentCar,NULL);    
+    printf("Finalizou Thread de movimento\n\n");
 }
 
 void printBuild(){
@@ -34,6 +64,9 @@ int main()
 {
     canCapture = true;
     num = 0;
+    walk = true;
+
+    Moviment mov;
 
     OpenCV openCV;
     printf("Iniciou Aplicacao\n"); 
@@ -46,14 +79,17 @@ int main()
 
     while(true){	
 
-        if(canCapture){
-           printBuild();
+	if(walk) mov.executeFrente(walk);
+
+        /*if(canCapture){
+           //printBuild();
            capture >> frame;
-	   chamaOpenCV(openCV);
+	   chamaOpenCVFace(openCV);
+	   chamaOpenCVColor(openCV);
         }
         else{
            printf("Aguardando deteccao");
-        }
+        }*/
     }
 
     return 0;

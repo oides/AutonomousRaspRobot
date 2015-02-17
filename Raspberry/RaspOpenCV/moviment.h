@@ -8,25 +8,20 @@
 
 using namespace std;
 
-#define SLEEP_MOVIMENT 300
+#define SLEEP_MOVIMENT 1
 
 class Moviment
 {
 private:
     MessageQueue messageQueue;
     char* client_message;
-    pthread_t thread;
-    int thread_arg;
-    bool walk;
 public:
-    Moviment();
-    ~Moviment();
-
-    void executeFrente();
-    void executeRe();
-    void executeDireita();
-    void executeEsquerda();
-    void interromperExecucao();
+    void startMoviment(bool &walk);
+    void executeFrente(bool &walk);
+    void executeRe(bool &walk);
+    void executeDireita(bool &walk);
+    void executeEsquerda(bool &walk);
+    void interromperExecucao(bool &walk);
 };
 
 #endif // MOVIMENT_H

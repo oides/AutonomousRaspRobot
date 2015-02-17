@@ -15,6 +15,8 @@
 using namespace std;
 using namespace cv;
 
+#define PATH_SAVE_IMAGE /home/novais/Dados/Fotos/
+
 class OpenCV
 {
 private:
@@ -24,10 +26,11 @@ private:
      CascadeClassifier face_cascade;
      CascadeClassifier eyes_cascade;
      RNG rng;
-     void saveImage (Mat &frame, int &num);
+     void saveImage (Mat &frame, string prefixo, int &num);
      void printBuild();
 public:
     void detectFace(bool &canCapture, Mat &frame, int &num);
+    void detectColor(bool &canCapture, Mat &frame, int &num);
 };
 
 #endif // OPENCV_H
