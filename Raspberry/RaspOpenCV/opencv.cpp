@@ -41,12 +41,7 @@ void OpenCV::init(bool &canCapture, Mat &frame)
       //}
 }*/
 
-void OpenCV::startNum()
-{
-    num = 0;
-}
-
-void OpenCV::detectFace(bool &canCapture, Mat &frame)
+void OpenCV::detectFace(bool &canCapture, Mat &frame, int &num)
 {
      canCapture = false;
      printBuild();
@@ -81,7 +76,7 @@ void OpenCV::detectFace(bool &canCapture, Mat &frame)
       //eyes_cascade.detectMultiScale( faceROI, eyes, 1.1, 2, 0 |CV_HAAR_SCALE_IMAGE, Size(30, 30) );
       //if(eyes.size() == 2){
 	  printf("Identificou e tirou uma foto!\n");
-    	  saveImage(frame);
+    	  saveImage(frame, num);
 	  printf("Guardou!\n");	
       //}
     
@@ -99,7 +94,7 @@ void OpenCV::printBuild(){
     printf("Tempo: %s", ctime(&rawtime));
 }
 
-void OpenCV::saveImage (Mat &frame) 
+void OpenCV::saveImage (Mat &frame, int &num) 
 {
 	string store_path;
 	

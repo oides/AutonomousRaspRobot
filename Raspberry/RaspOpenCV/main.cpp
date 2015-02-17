@@ -7,11 +7,12 @@ using namespace std;
 
 bool canCapture;
 Mat frame;
+int num;
 
 void *processing_image(void* param)
 {
     OpenCV *openCV = (OpenCV*)param;
-    openCV->detectFace(canCapture, frame);
+    openCV->detectFace(canCapture, frame, num);
 }
 
 void chamaOpenCV(OpenCV openCV){
@@ -39,12 +40,12 @@ void chamaCaptura(Capture cap){
 int main()
 {
     canCapture = true;
+    num = 0;
     
     //Capture cap;
     //cap.init(canCapture, frame);
 
     OpenCV openCV;
-    openCV.startNum();
     //openCV.init(canCapture, frame);
     printf("Iniciou Aplicacao\n"); 
 
