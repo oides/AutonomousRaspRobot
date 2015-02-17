@@ -5,10 +5,13 @@
 
 using namespace std;
 
+bool canCapture;
+Mat frame;
+
 void *processing_image(void* param)
 {
     OpenCV *openCV = (OpenCV*)param;
-    openCV->detect();
+    openCV->detectFace(canCapture, frame);
 }
 
 void chamaOpenCV(OpenCV openCV){
@@ -18,11 +21,11 @@ void chamaOpenCV(OpenCV openCV){
     pthread_join(processingImg,NULL);    
     printf("Chamou Thread de deteccao\n");
 }
-
+/*
 void *init_capture(void* param)
 {
     Capture *cap = (Capture*)param;
-    cap->capture();
+    cap->capture(canCapture, frame, capture);
 }
 
 void chamaCaptura(Capture cap){
@@ -31,23 +34,36 @@ void chamaCaptura(Capture cap){
     pthread_create(&initCapture, NULL, &init_capture, &cap);
     pthread_join(initCapture,NULL);    
     printf("Chamou Thread de captura\n");
-}
+}*/
 
 int main()
 {
-    bool canCapture = true;
-    Mat frame;
-
-    Capture cap;
-    cap.init(canCapture, frame);
+    canCapture = true;
+    
+    //Capture cap;
+    //cap.init(canCapture, frame);
 
     OpenCV openCV;
-    openCV.init(canCapture, frame);
-    printf("Iniciou Aplicacao\n");
+    openCV.startNum();
+    //openCV.init(canCapture, frame);
+    printf("Iniciou Aplicacao\n"); 
+
+    cv::VideoCapture capture(0);
+    if( capture.isOpened() )
+    {
+ 	printf("Captura rodando!\n");
+    }
 
     while(true){	
-        chamaCaptura(cap);
-        chamaOpenCV(openCV);
+
+        if(canCapture){
+           capture >> frame;
+           //chamaCaptura(cap); 
+	   chamaOpenCV(openCV);
+        }
+        else{
+           printf("Aguardando deteccao");
+        }
     }
 
     return 0;

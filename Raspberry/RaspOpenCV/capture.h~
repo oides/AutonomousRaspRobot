@@ -14,6 +14,8 @@
 using namespace std;
 using namespace cv;
 
+//cv::VideoCapture capture;
+
 class Capture
 {
 private:
@@ -22,11 +24,11 @@ private:
      CascadeClassifier face_cascade;
      CascadeClassifier eyes_cascade;
      bool *tempCanCapture;
-     Mat tempFrame;
-
+     Mat *tempFrame;
 public:
     void init(bool &canCapture, Mat &frame);	
-    void capture();
+    //void capture();
+    void capture(Mat &frame, VideoCapture &capture);
 };
 
 #endif // OPENCV_H
