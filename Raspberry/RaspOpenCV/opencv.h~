@@ -24,13 +24,13 @@ private:
      CascadeClassifier eyes_cascade;
      RNG rng;
      int num;
-     bool tempCanCapture;
-     Mat tempFrame;
+     bool *tempCanCapture;
+     Mat *tempFrame;
 
-     void saveImage (Mat mat);
+     void saveImage (Mat *frame);
 public:
-    void init(bool &canCapture);
-    void detectFace( Mat frame );
+    void init(bool &canCapture, Mat &frame);
+    void detectFace( Mat *frame );
     void detect();
 };
 

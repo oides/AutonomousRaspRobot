@@ -4,33 +4,47 @@ void OpenCV::init(bool &canCapture, Mat &frame)
 {
      face_cascade_name = "haarcascade_frontalface_alt.xml";
      eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
-     dirFace = "/home/pi/Dados/Fotos/"; 
+     dirFace = "/home/novais/Dados/Fotos/"; 
      rng = 12345;
      num = 0;  
-     tempCanCapture = canCapture;
-     tempFrame = frame;
+     tempCanCapture = &canCapture;
+     tempFrame = &frame;
+     //printf("canCapture = %s\n", &canCapture ? "true":"false");
+     //printf("tempCanCapture = %s\n", *tempCanCapture ? "true":"false");
  }
 void OpenCV::detect()
 {
       printf("Detect\n");
-      while(true){
-         if(!tempCanCapture){
- 	    tempCanCapture = false;
-            printf("Entrou1\n");
-	    if (!tempFrame.empty()){	 
+      //while(true){
+
+   	 *tempCanCapture = false;
+
+	// CODIGO
+            printf("Entrou detect\n");
+        sleep(1);
+            printf("Entrou2 detect\n");
+   	 //*tempCanCapture = true;
+
+//         printf("tempCanCapture5 = %s\n", *tempCanCapture ? "true":"false");
+         //if(!*tempCanCapture){
+
+
+	    /*if (!*tempFrame->empty()){	 
                printf("Entrou2\n");
-  	       detectFace( tempFrame ); 
-            }
-         }
-      }
+  	       detectFace( *tempFrame ); 
+            }*/
+  	       //detectFace( tempFrame ); 
+  // 	    *tempCanCapture = true;
+         //}
+      //}
 }
 
-void OpenCV::detectFace( Mat tempFrame )
+void OpenCV::detectFace( Mat *tempFrame )
 {
   std::vector<Rect> faces;
   Mat frame_gray;
 
-  cvtColor( tempFrame, frame_gray, CV_BGR2GRAY );
+  cvtColor( *tempFrame, frame_gray, CV_BGR2GRAY );
   equalizeHist( frame_gray, frame_gray );
     printf("Detectar face\n\n");
   //-- Detect faces
@@ -54,11 +68,11 @@ void OpenCV::detectFace( Mat tempFrame )
     
       //moviment.executeFrente();
   }
-   tempCanCapture = true;
-   printf("tempCanCapture = true\n");
+   *tempCanCapture = true;
+     printf("tempCanCapture4 = %s\n", *tempCanCapture ? "true":"false");
  }
 
-void OpenCV::saveImage (Mat mat) 
+void OpenCV::saveImage (Mat *frame) 
 {
 	string store_path;
 	
@@ -68,7 +82,7 @@ void OpenCV::saveImage (Mat mat)
 
 	num = num + 1;
 
-	bool write_success = imwrite(store_path, mat);
+	bool write_success = imwrite(store_path, *frame);
 	if (write_success == true ) {
 		printf("Sucesso ao armanezar imagem!");
 	}

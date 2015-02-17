@@ -39,15 +39,15 @@ int main()
     Mat frame;
 
     Capture cap;
-    cap.init(canCapture);
+    cap.init(canCapture, frame);
 
     OpenCV openCV;
-    openCV.init(canCapture);
+    openCV.init(canCapture, frame);
     printf("Iniciou Aplicacao\n");
 
-    chamaCaptura(cap);
-
-    chamaOpenCV(openCV);
-
+    while(true){	
+        chamaCaptura(cap);
+        chamaOpenCV(openCV);
+    }
     return 0;
 }

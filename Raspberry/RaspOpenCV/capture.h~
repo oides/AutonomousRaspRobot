@@ -21,11 +21,11 @@ private:
      String eyes_cascade_name;
      CascadeClassifier face_cascade;
      CascadeClassifier eyes_cascade;
-     bool tempCanCapture;
+     bool *tempCanCapture;
      Mat tempFrame;
 
 public:
-    void init(bool &canCapture);	
+    void init(bool &canCapture, Mat &frame);	
     void capture();
 };
 

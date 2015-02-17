@@ -21,8 +21,8 @@ private:
      String eyes_cascade_name;
      CascadeClassifier face_cascade;
      CascadeClassifier eyes_cascade;
-     bool tempCanCapture;
-     Mat tempFrame;
+     bool *tempCanCapture;
+     Mat *tempFrame;
 
 public:
     void init(bool &canCapture, Mat &frame);	
