@@ -4,7 +4,7 @@ void OpenCV::init(bool &canCapture, Mat &frame)
 {
      face_cascade_name = "haarcascade_frontalface_alt.xml";
      eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
-     dirFace = "/home/novais/Dados/Fotos/"; 
+     dirFace = "/home/pi/Dados/Fotos/"; 
      rng = 12345;
      num = 0;  
      tempCanCapture = canCapture;

@@ -17,7 +17,7 @@ void OpenCV::detect()
          if(!tempCanCapture){
  	    tempCanCapture = false;
             printf("Entrou1\n");
-	    if (!frame.empty()){	 
+	    if (!tempFrame.empty()){	 
                printf("Entrou2\n");
   	       detectFace( tempFrame ); 
             }
