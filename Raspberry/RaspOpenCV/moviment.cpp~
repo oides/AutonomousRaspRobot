@@ -15,9 +15,7 @@ void Moviment::executeFrente(bool &walk)
     printf("executeFrente\n");
     walk = true;
     strncpy(client_message, FRENTE, MQ_MESSAGE_LENGTH);
-    printf("executeFrente3\n");
     messageQueue.sendMessage(client_message);
-    printf("executeFrente4\n");
     sleep(2);
 }
 
